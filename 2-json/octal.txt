@@ -1,0 +1,12 @@
+
+
+4 2 1
+R W X
+
+Type of Users = Owner Group Root
+
+a.txt // rwx , rw , r , w , x
+         777 ,666, 444 , 222 , 111
+          //4+2+1 =
+
+          chmod
