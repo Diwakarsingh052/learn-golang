@@ -15,7 +15,7 @@ const (
 	dbname   = "user"
 )
 
-var db *sql.DB // bad idea to do in production
+var db *sql.DB // bad idea to do in production to put database connection in global state
 
 func main() {
 	var err error
@@ -39,7 +39,7 @@ func main() {
 	//update()
 	//delete()
 	//querySingleRecord()
-	queryMultipleRecord()
+	//queryMultipleRecord()
 }
 
 // CRUD  Operation //Create Read Update Delete
