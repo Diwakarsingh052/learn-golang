@@ -1,0 +1,10 @@
+package model
+
+import "gorm.io/gorm"
+
+type user struct {
+	gorm.Model
+	Email        string `json:"email" gorm:"not null;unique"   `
+	Password     string `json:"password" gorm:"-"`
+	PasswordHash string `json:"password_hash"`
+}
