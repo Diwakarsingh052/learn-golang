@@ -23,12 +23,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	us.DestructiveReset()
+	defer us.Close()
+	//us.DestructiveReset()
 
 	userC := controller.NewUserController(us)
 
 	r := mux.NewRouter()
 	r.HandleFunc("/signup", userC.Create).Methods("POST")
+	r.HandleFunc("/login", userC.Login).Methods("GET")
 
 	http.ListenAndServe(":8080", r)
 
