@@ -103,7 +103,16 @@ func (us *UserService) SaveToken(user *User) error {
 }
 
 func (us *UserService) SearchToken(token string) (*User, error) {
-	return nil, nil
+
+	var user User
+	tokenHash := us.HMAC.Hash(token)
+	db := us.db.Where("token_hash = ?", tokenHash)
+	err := first(db, &user)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+
 }
 
 //DestructiveReset drops the table don't use in prod

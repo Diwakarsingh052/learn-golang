@@ -116,3 +116,15 @@ func (uc *UserController) signIn(w http.ResponseWriter, user *model.User) error 
 	http.SetCookie(w, &cookie)
 	return nil
 }
+func (uc *UserController) Home(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "This is our home page")
+}
+
+func (uc *UserController) Hello(w http.ResponseWriter, r *http.Request) {
+
+	cookie, _ := r.Cookie("token")
+	user, _ := uc.SearchToken(cookie.Value)
+	
+	fmt.Fprintln(w, "Hello", user.Email)
+
+}

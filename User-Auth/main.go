@@ -2,6 +2,7 @@ package main
 
 import (
 	"auth/controller"
+	"auth/middleware"
 	"auth/model"
 	"log"
 	"net/http"
@@ -27,11 +28,13 @@ func main() {
 	//us.DestructiveReset()
 
 	userC := controller.NewUserController(us)
+	requireUser := middleware.RequireUser{UserService: us}
 
 	r := mux.NewRouter()
 	r.HandleFunc("/signup", userC.Create).Methods("POST")
 	r.HandleFunc("/login", userC.Login).Methods("GET")
-
+	r.HandleFunc("/hello", requireUser.ApplyFn(userC.Hello)).Methods("GET")
+	r.HandleFunc("/", userC.Home)
 	http.ListenAndServe(":8080", r)
 
 }
